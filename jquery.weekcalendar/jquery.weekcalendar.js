@@ -875,14 +875,17 @@
                //trigger drop callback
                options.eventDrop(newCalEvent, calEvent, $newEvent);
                $calEvent.data("preventClick", true);
+
+               var $weekDayOld = self._findWeekDayForEvent($calEvent.data("calEvent"), self.element.find(".week-calendar-time-slots .day-column-inner"));
+
+               if ($weekDayOld.data("startDate") != $weekDay.data("startDate")) {
+                  self._adjustOverlappingEvents($weekDayOld);
+               }
+               self._adjustOverlappingEvents($weekDay);
+
                setTimeout(function() {
-                  var $weekDayOld = self._findWeekDayForEvent($calEvent.data("calEvent"), self.element.find(".week-calendar-time-slots .day-column-inner"));
-                  $calEvent.remove();
-                  if ($weekDayOld.data("startDate") != $weekDay.data("startDate")) {
-                     self._adjustOverlappingEvents($weekDayOld);
-                  }
-                  self._adjustOverlappingEvents($weekDay);
-               }, 500);
+                   $calEvent.remove();
+               }, 1000);
 
             }
          });
