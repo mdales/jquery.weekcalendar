@@ -11,7 +11,7 @@ $(document).ready(function() {
       firstDayOfWeek : 1,
       businessHours :{start: 8, end: 18, limitDisplay: true },
       height : function($calendar) {
-         return $(window).height() - $("h1").outerHeight();
+         return $(window).height() - $("h1").outerHeight() - 1;
       },
       eventRender : function(calEvent, $event) {
          if (calEvent.end.getTime() < new Date().getTime()) {
@@ -66,8 +66,6 @@ $(document).ready(function() {
 
          $dialogContent.find(".date_holder").text($calendar.weekCalendar("formatDate", calEvent.start));
          setupStartAndEndTimeFields(startField, endField, calEvent, $calendar.weekCalendar("getTimeslotTimes", calEvent.start));
-         $(window).resize().resize(); //fixes a bug in modal overlay size ??
-
 
       },
       eventDrop : function(calEvent, $event) {
