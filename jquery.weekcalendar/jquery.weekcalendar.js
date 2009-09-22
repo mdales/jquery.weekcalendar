@@ -29,9 +29,7 @@
          self._renderCalendar();
          self._loadCalEvents();
          self._resizeCalendar();
-         //setTimeout(function() {
          self._scrollToHour(self.options.date.getHours());
-         //}, 500);
 
          $(window).unbind("resize.weekcalendar");
          $(window).bind("resize.weekcalendar", function() {
@@ -751,7 +749,10 @@
 
          var $weekDay = self._findWeekDayForEvent(calEvent, self.element.find(".week-calendar-time-slots .day-column-inner"));
          if ($weekDay) {
-            self._renderEvent(calEvent, $weekDay);
+            var $calEvent = self._renderEvent(calEvent, $weekDay);
+            self._adjustForEventCollisions($weekDay, $calEvent, calEvent, calEvent);
+            self._refreshEventDetails(calEvent, $calEvent);
+            self._positionEvent($weekDay, $calEvent);
             self._adjustOverlappingEvents($weekDay);
          }
       }
