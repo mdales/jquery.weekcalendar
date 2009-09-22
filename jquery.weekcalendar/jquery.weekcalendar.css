@@ -183,9 +183,12 @@ table.week-calendar-time-slots {
 	position: relative;	
 }
 
-.ui-resizable-s {
+.week-calendar .ui-resizable-s {
 	height: 10px;
 	bottom: -8px;	
 }
 
 
+.week-calendar .ui-draggable-dragging {
+   z-index: 1000;
+}

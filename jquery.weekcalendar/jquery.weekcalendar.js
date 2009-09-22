@@ -515,7 +515,7 @@
          $weekDayColumns.each(function(i, val) {
 
             $(this).data("startDate", self._cloneDate(currentDay));
-            $(this).data("endDate", new Date(currentDay.getTime() + (MILLIS_IN_DAY - 1)));
+            $(this).data("endDate", new Date(currentDay.getTime() + (MILLIS_IN_DAY)));
             if (self._isToday(currentDay)) {
                $(this).parent().addClass("today");
             } else {
@@ -1117,7 +1117,7 @@
        */
       _dateLastMilliOfWeek : function(date) {
          var lastDayOfWeek = this._dateLastDayOfWeek(date);
-         return new Date(lastDayOfWeek.getTime() + (MILLIS_IN_DAY - 1));
+         return new Date(lastDayOfWeek.getTime() + (MILLIS_IN_DAY));
 
       }
       ,
