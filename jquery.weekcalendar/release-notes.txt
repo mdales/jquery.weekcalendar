@@ -4,6 +4,7 @@
 - Fixed bug where when resizing and overlapping events is enabled, the layout of overlapping of events wasn't being recalculated
 - Fixed bug where deleting existing or unsaved events that were overlapping was not recalcuating the layout of remaining events
 - Fixed bug where calendar was not honouring the allowCalEventOverlap = false option when creating new or updating events from dialog (issue 84)
+- Added 'daysToShow' config option to optionally only display a limited number of days in a week. (thanks jura khrapunov)
 
 1.2.1 
 - Added public method 'getData' that returns the value of a named config option.

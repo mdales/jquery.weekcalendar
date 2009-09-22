@@ -303,7 +303,7 @@
 
          //render calendar header
          calendarHeaderHtml = "<table class=\"week-calendar-header\"><tbody><tr><td class=\"time-column-header\"></td>";
-         for (var i = 1; i <= 7; i++) {
+         for (var i = 1; i <= options.daysToShow; i++) {
             calendarHeaderHtml += "<td class=\"day-column-header day-" + i + "\"></td>";
          }
          calendarHeaderHtml += "<td class=\"scrollbar-shim\"></td></tr></tbody></table>";
@@ -314,7 +314,7 @@
                 <tbody>\
                 <tr>\
                 <td class=\"grid-timeslot-header\"></td>\
-                <td colspan=\"7\">\
+                <td colspan=\"" + options.daysToShow + "\">\
                 <div class=\"time-slot-wrapper\">\
                 <div class=\"time-slots\">";
 
@@ -344,7 +344,7 @@
 
          calendarBodyHtml += "</td>";
 
-         for (var i = 1; i <= 7; i++) {
+         for (var i = 1; i <= options.daysToShow; i++) {
             calendarBodyHtml += "<td class=\"day-column day-" + i + "\"><div class=\"day-column-inner\"></div></td>"
          }
 
@@ -1356,6 +1356,7 @@
          timeFormat : "h:i a",
          dateFormat : "M d, Y",
          use24Hour : false,
+         daysToShow : 7,
          firstDayOfWeek : 0, // 0 = Sunday, 1 = Monday, 2 = Tuesday, ... , 6 = Saturday
          useShortDayNames: false,
          timeSeparator : " to ",
