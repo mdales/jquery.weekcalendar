@@ -1,5 +1,8 @@
 1.2.2 (CURRENT DEV RELEASE)
-
+- Fixed inconsistent bug with dropping events in IE7/8 causing a js error
+- Updated the way that events that overlap are organised if using the overlapEventsSeperate option (thanks Yann)
+- Fixed bug where when resizing and overlapping events is enabled, the layout of overlapping of events wasn't being recalculated
+- Fixed bug where deleting existing or unsaved events that were overlapping was not recalcuating the layout of remaining events
 
 1.2.1 
 - Added public method 'getData' that returns the value of a named config option.

@@ -98,13 +98,19 @@
        * Remove an event based on it's id
        */
       removeEvent : function(eventId) {
-         this.element.find(".cal-event").each(function() {
+
+         var self = this;
+
+         self.element.find(".cal-event").each(function() {
             if ($(this).data("calEvent").id === eventId) {
-               $(this).fadeOut(function() {
-                  $(this).remove();
-               });
+               $(this).remove();
                return false;
             }
+         });
+         
+         //this could be more efficient rather than running on all days regardless...
+         self.element.find(".day-column-inner").each(function(){
+            self._adjustOverlappingEvents($(this));
          });
       },
 
@@ -113,8 +119,16 @@
        * This is useful to call after adding a freshly saved new event.
        */
       removeUnsavedEvents : function() {
-         this.element.find(".new-cal-event").fadeOut(function() {
+
+         var self = this;
+
+         self.element.find(".new-cal-event").each(function() {
             $(this).remove();
+         });
+         
+         //this could be more efficient rather than running on all days regardless...
+         self.element.find(".day-column-inner").each(function(){
+            self._adjustOverlappingEvents($(this));
          });
       },
 
@@ -621,13 +635,14 @@
                var curGroups = this;
                $.each(curGroups, function(groupIndex) {
                   var curGroup = this;
+
                   // do we want events to be displayed as overlapping
                   if (self.options.overlapEventsSeparate) {
                      var newWidth = 100 / curGroups.length;
                      var newLeft = groupIndex * newWidth;
                   } else {
                      // TODO what happens when the group has more than 10 elements
-                     var newWidth = 100 - ( curGroups.length * 10 );
+                     var newWidth = 100 - ( (curGroups.length - 1) * 10 );
                      var newLeft = groupIndex * 10;
                   }
                   $.each(curGroup, function() {
@@ -644,9 +659,7 @@
                      $(this).css({width: newWidth + "%", left:newLeft + "%", right: 0});
                   });
                });
-            }
-                  )
-                  ;
+            });
          }
       },
 
@@ -918,7 +931,7 @@
 
                self._refreshEventDetails(newCalEvent, $calEvent);
                self._positionEvent($weekDay, $calEvent);
-
+               self._adjustOverlappingEvents($weekDay);
                //trigger resize callback
                options.eventResize(newCalEvent, calEvent, $calEvent);
                $calEvent.data("preventClick", true);
@@ -1447,5 +1460,4 @@
    }();
 
 
-})
-      (jQuery);
+})(jQuery);
