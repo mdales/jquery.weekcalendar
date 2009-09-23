@@ -234,6 +234,16 @@
             } else if ($target.parent().hasClass("cal-event")) {
                options.eventClick($target.parent().data("calEvent"), $target.parent(), event);
             }
+         }).dblclick(function(event) {
+            var $target = $(event.target);
+            if ($target.data("preventClick")) {
+               return;
+            }
+            if ($target.hasClass("cal-event")) {
+               options.eventDoubleClick($target.data("calEvent"), $target, event);
+            } else if ($target.parent().hasClass("cal-event")) {
+               options.eventDoubleClick($target.parent().data("calEvent"), $target.parent(), event);
+            }
          }).mouseover(function(event) {
             var $target = $(event.target);
 
@@ -1384,6 +1394,8 @@
             return true;
          },
          eventClick : function() {
+         },
+         eventDoubleClick : function () {
          },
          eventRender : function(calEvent, element) {
             return element;
